@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float cameraSpeed;
-    public float rotationSpeed;
+    public float cameraSpeed = 10f;
+    public float rotationSpeed = 50f;
+    public float zoomSpeed = 200f;
+
+    [Header("Camera Limitations")]
+    public Vector2 xAxis;
+    public Vector2 zAxis;
+    public Vector2 zoomLimit;
 
     private Vector3 cameraPos; // Current position of camera
     private Vector3 frwdDir; // Z axis of camera in world space
@@ -51,6 +57,19 @@ public class CameraController : MonoBehaviour
         }
 
         #endregion
+        #region CameraZoom
+
+        float currentZoom = Input.GetAxis("Mouse ScrollWheel");
+
+        cameraPos.y -= currentZoom * zoomSpeed * Time.deltaTime;
+
+        #endregion
+
+        // Movement limitations
+        cameraPos.x = Mathf.Clamp(cameraPos.x, xAxis.x, xAxis.y);
+        cameraPos.z = Mathf.Clamp(cameraPos.z, zAxis.x, zAxis.y);
+        // Zoom limitations
+        cameraPos.y = Mathf.Clamp(cameraPos.y, zoomLimit.x, zoomLimit.y);
 
         transform.position = cameraPos;
     }
