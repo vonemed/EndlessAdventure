@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerController : MonoBehaviour
 {
+    PlayerMovement player;
+
     public LayerMask ground;
     Camera cam;
 
     void Start()
     {
         cam = Camera.main;
+        player = GetComponent<PlayerMovement>();
     }
     void Update()
     {
@@ -20,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100, ground))
             {
-                Debug.Log(hit.transform);
+                player.Move(hit.point);
             }
         }
     }
