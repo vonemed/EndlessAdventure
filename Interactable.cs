@@ -23,7 +23,6 @@ public class Interactable : MonoBehaviour
             if (dist.magnitude <= reachRadius)
             {
                 Interaction();
-                Debug.Log("Interaction!!");
             }
         }
     }

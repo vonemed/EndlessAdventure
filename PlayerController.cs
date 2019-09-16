@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerStats))]
 public class PlayerController : MonoBehaviour
 {
     PlayerMovement player; // Model of player
@@ -47,9 +48,6 @@ public class PlayerController : MonoBehaviour
         interactable = _interactable;
         interactable.Focuse(player.transform);
         player.Follow(_interactable);
-
-        Debug.Log("This item is Interactable. Woah!");
-
     }
 
     void resetFocus()
