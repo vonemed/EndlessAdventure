@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100, ground))
             {
- 
+                player.StopFollow();
                 player.Move(hit.point);
             }
             if (Physics.Raycast(ray, out hit, 100))
@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
                 if (interactable != null)
                 {
+                    player.StoppingDist(interactable);
+                    player.Follow(interactable.transform.position);
                     Debug.Log("This item is Interactable. Woah!");
                     interactable.PlayerPos(transform);
                 }
