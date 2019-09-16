@@ -6,16 +6,17 @@ public class Interactable : MonoBehaviour
 {
     public float reachRadius = 2f; // Interaction radius
     Transform player; // Player position
+    public bool focused = false; // Indicator whether player is focused on object or not
 
     Vector3 dist; // Distance from item to player
-    virtual protected void Interaction()
+    public virtual void Interaction()
     {
 
     }
 
     void Update ()
     {
-        if (player != null)
+        if (focused)
         {
             dist = transform.position - player.position;
 
@@ -27,9 +28,10 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public void PlayerPos (Transform _player)
+    public void Focuse (Transform _player)
     {
         player = _player;
+        focused = true;
     }
 
     // Drawing a radius in editor

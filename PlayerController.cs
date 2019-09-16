@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
                     player.StoppingDist(interactable);
                     player.Follow(interactable.transform.position);
                     Debug.Log("This item is Interactable. Woah!");
-                    interactable.PlayerPos(transform);
+                    interactable.Focuse(transform);
                 }
 
             }
