@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyInteract : MonoBehaviour
+public class EnemyInteract : Interactable
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool chasing = false;
+    public override void Interaction()
     {
-        
+        base.Interaction();
+        Attack();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Attack()
     {
-        
+        // Player attacking enemy
+        chasing = true;
+        Debug.Log("Enemy is being attacked!");
     }
 }
