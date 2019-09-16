@@ -7,36 +7,39 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
     NavMeshAgent agent;
-    Interactable interactable;
+    Transform currentTarget;
 
-    void Start ()
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public void Move (Vector3 _position)
+    void Update()
     {
-        agent.isStopped = false;
-        agent.SetDestination(_position);
-        agent.updateRotation = true;
+        if (currentTarget != null)
+        {
+            agent.SetDestination(currentTarget.position);
+        }
     }
 
-    public void Follow (Vector3 _position)
+    public void Move (Vector3 _position)
     {
-        agent.stoppingDistance = interactable.reachRadius;
-        agent.isStopped = false;
         agent.SetDestination(_position);
+    }
+
+    public void Follow (Interactable _target)
+    {
+        agent.stoppingDistance = _target.reachRadius;
         agent.updateRotation = true;
+
+        currentTarget = _target.transform;
     }
 
     public void StopFollow ()
     {
-        agent.isStopped = true;
-        agent.updateRotation = false;
-    }
+        agent.stoppingDistance = 0f; // Reset the stopping distance
+        agent.updateRotation = true;
 
-    public void StoppingDist(Interactable _interactable)
-    {
-        interactable = _interactable;
+        currentTarget = null; // Reset current target
     }
 }

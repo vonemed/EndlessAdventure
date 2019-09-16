@@ -1,14 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ItemInteract : Interactable
 {
+    public Item item;
     public override void Interaction()
     {
         base.Interaction();
 
+        pickUp();
+    }
+
+    public void pickUp()
+    {
         Destroy(gameObject);
-        Debug.Log("Item is destroyed!");
     }
 }

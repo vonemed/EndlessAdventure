@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     PlayerMovement player; // Model of player
-    Interactable interactable;
+    Interactable interactable; // An interactable on which player is currently focused
 
     public LayerMask ground;
     Camera cam;
@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100, ground))
             {
-                player.StopFollow();
                 player.Move(hit.point);
+                resetFocus(); 
             }
             if (Physics.Raycast(ray, out hit, 100))
             {
@@ -34,13 +34,31 @@ public class PlayerController : MonoBehaviour
 
                 if (interactable != null)
                 {
-                    player.StoppingDist(interactable);
-                    player.Follow(interactable.transform.position);
-                    Debug.Log("This item is Interactable. Woah!");
-                    interactable.Focuse(transform);
+                    setFocus(interactable);
                 }
 
             }
+        }
+    }
+
+    void setFocus(Interactable _interactable)
+    {
+        // Set focus for player follow it
+        interactable = _interactable;
+        interactable.Focuse(player.transform);
+        player.Follow(_interactable);
+
+        Debug.Log("This item is Interactable. Woah!");
+
+    }
+
+    void resetFocus()
+    {
+        if (interactable != null)
+        {
+            interactable.focused = false;
+            interactable = null;
+            player.StopFollow();
         }
     }
 }
