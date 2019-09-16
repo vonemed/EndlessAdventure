@@ -13,9 +13,10 @@ public class PlayerMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public void Move(Vector3 _position)
+    public void Move (Vector3 _position)
     {
         agent.SetDestination(_position);
         agent.updateRotation = true;
     }
+
 }

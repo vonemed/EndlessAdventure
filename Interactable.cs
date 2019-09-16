@@ -4,15 +4,38 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float reachRadius = 2f; // Interaction radius
+    Transform player; // Player position
+
+    Vector3 dist; // Distance from item to player
+    virtual protected void Interaction()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update ()
     {
-        
+        if (player != null)
+        {
+            dist = transform.position - player.position;
+
+            if (dist.magnitude <= reachRadius)
+            {
+                Interaction();
+                Debug.Log("Interaction!!");
+            }
+        }
+    }
+
+    public void PlayerPos (Transform _player)
+    {
+        player = _player;
+    }
+
+    // Drawing a radius in editor
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, reachRadius);
     }
 }
