@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStats : MonoBehaviour
+public class EnemyStats : Stats
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        health = 100f;
+        attackDamage = 5f;
+        attackSpeed = 2f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
