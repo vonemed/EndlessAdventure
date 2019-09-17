@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     EnemyMovement enemyMove;
     EnemyInteract enemy;
+    Combat combat;
 
     public float detectRadius = 10f;
 
@@ -18,6 +19,7 @@ public class EnemyController : MonoBehaviour
         enemyMove = GetComponent<EnemyMovement>();
         enemy = GetComponent<EnemyInteract>();
         player = PlayerManager.instance.player.transform;
+        combat = GetComponent<Combat>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,16 @@ public class EnemyController : MonoBehaviour
         if (dist <= detectRadius)
         {
             enemyMove.followPlayer(player);
+
+            if (dist <= 2f) // If enemy reached stopping distance 
+            {
+                Stats playerStats = player.GetComponent<Stats>();
+
+                if (playerStats != null)
+                {
+                    combat.Attack(playerStats);
+                }
+            }
         }
     }
 
