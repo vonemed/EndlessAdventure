@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
     NavMeshAgent agent;
     Transform currentTarget;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -14,10 +15,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        if (currentTarget != null)
-        {
-            agent.SetDestination(currentTarget.position);
-        }
+        agent.stoppingDistance = 2f;
     }
 
     public void Move(Vector3 _position)

@@ -2,19 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Stats))]
 public class EnemyInteract : Interactable
 {
-    public bool chasing = false;
+    PlayerManager playerManager;
+    Stats selfStats;
+
+    void Start()
+    {
+        playerManager = PlayerManager.instance;
+        selfStats = GetComponent<Stats>();
+    }
     public override void Interaction()
     {
         base.Interaction();
-        Attack();
-    }
+        Combat playerCombat = playerManager.player.GetComponent<Combat>();
 
-    public void Attack()
-    {
-        // Player attacking enemy
-        chasing = true;
-        Debug.Log("Enemy is being attacked!");
+        if (playerCombat != null)
+        {
+            playerCombat.Attack(selfStats);
+        }
+
     }
 }

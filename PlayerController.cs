@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(PlayerStats))]
 public class PlayerController : MonoBehaviour
 {
     PlayerMovement player; // Model of player

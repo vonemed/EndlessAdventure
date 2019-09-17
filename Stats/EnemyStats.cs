@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class EnemyStats : Stats
 {
-    void Start()
+    public override void Die()
     {
-        health = 100f;
-        attackDamage = 5f;
-        attackSpeed = 2f;
-    }
+        base.Die();
 
+        Destroy(gameObject);
+    }
 }
