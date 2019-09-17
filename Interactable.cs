@@ -16,7 +16,7 @@ public class Interactable : MonoBehaviour
 
     void Update ()
     {
-        if (focused)
+        if (focused && player != null)
         {
             dist = transform.position - player.position;
 

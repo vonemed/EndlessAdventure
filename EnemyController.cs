@@ -25,19 +25,22 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float dist = Vector3.Distance(player.position, transform.position);
-
-        if (dist <= detectRadius)
+        if (player != null)
         {
-            enemyMove.followPlayer(player);
+            float dist = Vector3.Distance(player.position, transform.position);
 
-            if (dist <= 2f) // If enemy reached stopping distance 
+            if (dist <= detectRadius)
             {
-                Stats playerStats = player.GetComponent<Stats>();
+                enemyMove.followPlayer(player);
 
-                if (playerStats != null)
+                if (dist <= 2f) // If enemy reached stopping distance 
                 {
-                    combat.Attack(playerStats);
+                    Stats playerStats = player.GetComponent<Stats>();
+
+                    if (playerStats != null)
+                    {
+                        combat.Attack(playerStats);
+                    }
                 }
             }
         }
