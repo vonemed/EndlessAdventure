@@ -6,9 +6,10 @@ public class Stats : MonoBehaviour
     public Attribute attackDamage;
     public Attribute attackSpeed;
 
-    int currentHealth;
+    public int currentHealth;
     int currentDamage;
 
+    public event System.Action<int, int> HealthChange;
     void Start()
     {
         currentHealth = health.GetValue();
@@ -26,7 +27,16 @@ public class Stats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(transform.name + " takes " + damage + " damage.");
+
+        if (currentHealth > 0)
+        {
+            Debug.Log(transform.name + " takes " + damage + " damage.");
+        }
+
+        if (HealthChange != null)
+        {
+            HealthChange(health.GetValue(), currentHealth);
+        }
 
         if (currentHealth <= 0)
         {

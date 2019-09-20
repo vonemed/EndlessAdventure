@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerStats : Stats
 {
-
     public override void Die()
     {
         base.Die();

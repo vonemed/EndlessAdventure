@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
         if (currentTarget != null)
         {
             agent.SetDestination(currentTarget.position);
+            FaceTarget();
         }
     }
 
@@ -41,5 +42,13 @@ public class PlayerMovement : MonoBehaviour
         agent.updateRotation = true;
 
         currentTarget = null; // Reset current target
+    }
+
+    void FaceTarget()
+    {
+        Vector3 direction = (currentTarget.position - transform.position).normalized; // The direction towards target
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z)); // Rotation towards target
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smooth rotation
     }
 }
